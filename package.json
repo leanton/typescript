@@ -1,8 +1,9 @@
 {
-  "name": "TSGulpDemo",
+  "name": "TSEdX",
   "version": "1.0.0",
-  "description": "Using Gulp to Compile TypeScript",
-  "author": "Dan Wahlin",
+  "description": "Using Gulp to Compile TypeScript, completing labs of TypeScript edX",
+  "author": "Anton Le",
+  "private": true,
   "engines": {
   	"node": ">=0.10.35"
   },
