@@ -4,8 +4,10 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	plumber = require('gulp-plumber'),
 	tsPath = "typescript/*.ts",
-	compilePath = "js/compiled",
-	dist = "js/dist";
+	compilePath = "app/tsjs",
+	dist = "js/dist",
+	browserSync = require('browser-sync'),
+	reload = browserSync.reload;
 
 gulp.task('compressScripts', function() {
 	gulp.src([
@@ -25,13 +27,23 @@ gulp.task('typescript', function() {
 					noExternalResolve: true
 				}));
 	tsResults.dts.pipe(gulp.dest(compilePath + '/tsdefinitions'));
-	return tsResults.js.pipe(gulp.dest(compilePath + '/typescript'));
+	return tsResults.js.pipe(gulp.dest(compilePath));
 });
 
 gulp.task('watch', function() {
 
 	gulp.watch([tsPath], ['typescript'])
 
+});
+
+gulp.task('serve', function() {
+  browserSync({
+    server: {
+      baseDir: 'app'
+    }
+  });
+
+  gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js'], {cwd: 'app'}, reload);
 });
 
 gulp.task('default', ['typescript', 'watch', 'compressScripts']);
